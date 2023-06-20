@@ -1,0 +1,21 @@
+name: Testing "Strict" ^X.X.X-RCX$ Tags
+
+concurrency: preprod
+
+on:
+  push:
+    tags:
+      - '^[0-9]+.[0-9]+.[0-9]+-RC[0-9]+$'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    environment: preprod
+    timeout-minutes: 25
+
+    # Steps represent a sequence of tasks that will be executed as part of the job
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          # Disabling shallow clone is recommended for improving relevancy of reporting
+          fetch-depth: 0
